@@ -98,9 +98,13 @@ larp.fn.map('n', '<leader>Ofw', function()
     end)
 end, { desc = 'Search Obsidian Workspace' })
 larp.fn.map('n', '<leader>Op', function()
+    if #opts.workspaces == 0 then
+        vim.notify('Obsidian Pull: No workspace configured', vim.log.levels.WARN)
+        return
+    end
     -- pull from jj asynchronously
     local path = vim.fn.expand(opts.workspaces[1].path)
-    vim.system({ 'sh', '-c', 'jj git fetch' }, { cwd = path, text = true }, function(obj)
+    vim.system({ 'jj', 'git', 'fetch' }, { cwd = path, text = true }, function(obj)
         vim.schedule(function()
             if obj.code == 0 then
                 vim.notify('Obsidian Pull: Success', vim.log.levels.INFO)
@@ -111,31 +115,62 @@ larp.fn.map('n', '<leader>Op', function()
     end)
 end, { desc = 'Obsidian Pull' })
 larp.fn.map('n', '<leader>Os', function()
+    if #opts.workspaces == 0 then
+        vim.notify('Obsidian Push: No workspace configured', vim.log.levels.WARN)
+        return
+    end
     local path = vim.fn.expand(opts.workspaces[1].path)
     local now = os.date('%Y-%m-%d %H:%M:%S')
 
-    -- Check for conflicts first, then push
-    local cmd = 'jj git fetch && '
-        .. 'if jj log -r @ --no-graph -T "conflict" | grep -q "true"; then '
-        .. 'echo "Conflicts detected!" >&2; exit 1; '
-        .. 'else '
-        .. 'jj bookmark move main --to @ && jj commit -m "Update '
-        .. now
-        .. '" && jj git push; '
-        .. 'fi'
-
-    vim.system({ 'sh', '-c', cmd }, { cwd = path, text = true }, function(obj)
+    -- Step 1: fetch
+    vim.system({ 'jj', 'git', 'fetch' }, { cwd = path, text = true }, function(fetch_obj)
         vim.schedule(function()
-            if obj.code == 0 then
-                vim.notify('Obsidian Push: Success\nUpdate ' .. now, vim.log.levels.INFO)
-            else
-                local err = obj.stderr or obj.stdout or ''
-                if err:match('Conflicts detected!') then
-                    vim.notify('Obsidian Push Aborted: Conflicts detected! Please resolve before pushing.', vim.log.levels.WARN)
-                else
-                    vim.notify('Obsidian Push Failed:\n' .. err, vim.log.levels.ERROR)
-                end
+            if fetch_obj.code ~= 0 then
+                vim.notify('Obsidian Push: Fetch failed:\n' .. (fetch_obj.stderr or ''), vim.log.levels.ERROR)
+                return
             end
+
+            -- Step 2: check for conflicts using jj's revset; '-T', '' produces no per-revision output
+            -- so any stdout content means at least one conflicted revision exists
+            vim.system({ 'jj', 'log', '-r', 'conflicts()', '--no-graph', '-T', '' }, { cwd = path, text = true }, function(conflict_obj)
+                vim.schedule(function()
+                    if (conflict_obj.stdout or '') ~= '' then
+                        vim.notify('Obsidian Push Aborted: Conflicts detected! Please resolve before pushing.', vim.log.levels.WARN)
+                        return
+                    end
+
+                    -- Step 3: move bookmark
+                    vim.system({ 'jj', 'bookmark', 'move', 'main', '--to', '@' }, { cwd = path, text = true }, function(bookmark_obj)
+                        vim.schedule(function()
+                            if bookmark_obj.code ~= 0 then
+                                vim.notify('Obsidian Push: Bookmark move failed:\n' .. (bookmark_obj.stderr or ''), vim.log.levels.ERROR)
+                                return
+                            end
+
+                            -- Step 4: commit
+                            vim.system({ 'jj', 'commit', '-m', 'Update ' .. now }, { cwd = path, text = true }, function(commit_obj)
+                                vim.schedule(function()
+                                    if commit_obj.code ~= 0 then
+                                        vim.notify('Obsidian Push: Commit failed:\n' .. (commit_obj.stderr or ''), vim.log.levels.ERROR)
+                                        return
+                                    end
+
+                                    -- Step 5: push
+                                    vim.system({ 'jj', 'git', 'push' }, { cwd = path, text = true }, function(push_obj)
+                                        vim.schedule(function()
+                                            if push_obj.code == 0 then
+                                                vim.notify('Obsidian Push: Success\nUpdate ' .. now, vim.log.levels.INFO)
+                                            else
+                                                vim.notify('Obsidian Push Failed:\n' .. (push_obj.stderr or push_obj.stdout or ''), vim.log.levels.ERROR)
+                                            end
+                                        end)
+                                    end)
+                                end)
+                            end)
+                        end)
+                    end)
+                end)
+            end)
         end)
     end)
 end, { desc = 'Commit and Push Obsidian Vault' })
