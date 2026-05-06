@@ -5,7 +5,7 @@ return {
     cmd = 'NeoCodeium',
     keys = {
         {
-            '<A-f>',
+            '<A-a>',
             function()
                 require('neocodeium').accept()
             end,
