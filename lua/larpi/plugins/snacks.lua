@@ -407,14 +407,14 @@ return {
             function()
                 Snacks.picker.lsp_definitions()
             end,
-            desc = 'Goto Definition',
+            desc = '[Snacks.Picker] LSP Definitions',
         },
         {
             'gD',
             function()
                 Snacks.picker.lsp_declarations()
             end,
-            desc = 'Goto Declaration',
+            desc = '[Snacks.Picker] LSP Declarations',
         },
         {
             'grr',
@@ -422,49 +422,49 @@ return {
                 Snacks.picker.lsp_references()
             end,
             nowait = true,
-            desc = 'References',
+            desc = '[Snacks.Picker] LSP References',
         },
         {
             'gri',
             function()
                 Snacks.picker.lsp_implementations()
             end,
-            desc = 'Goto Implementation',
+            desc = '[Snacks.Picker] LSP Implementations',
         },
         {
             'grt',
             function()
                 Snacks.picker.lsp_type_definitions()
             end,
-            desc = 'Goto T[y]pe Definition',
+            desc = '[Snacks.Picker] LSP Type Definitions',
         },
         {
             'grci',
             function()
                 Snacks.picker.lsp_incoming_calls()
             end,
-            desc = 'C[a]lls Incoming',
+            desc = '[Snacks.Picker] LSP Incoming Calls',
         },
         {
             'grco',
             function()
                 Snacks.picker.lsp_outgoing_calls()
             end,
-            desc = 'C[a]lls Outgoing',
+            desc = '[Snacks.Picker] LSP Outgoing Calls',
         },
         {
             '<leader>ss',
             function()
                 Snacks.picker.lsp_symbols()
             end,
-            desc = 'LSP Symbols',
+            desc = '[Snacks.Picker] LSP Symbols',
         },
         {
             '<leader>sS',
             function()
                 Snacks.picker.lsp_workspace_symbols()
             end,
-            desc = 'LSP Workspace Symbols',
+            desc = '[Snacks.Picker] LSP Workspace Symbols',
         },
 
         -- Lazygit
