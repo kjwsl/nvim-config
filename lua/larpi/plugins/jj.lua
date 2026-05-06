@@ -31,15 +31,6 @@ return {
             desc = '[JJ] Log All',
         },
         {
-            -- Alias for moving bookmarks
-            '<leader>jt',
-            function()
-                require('jj.cmd').j('tug')
-                require('jj.cmd').log()
-            end,
-            desc = '[JJ] Tug',
-        },
-        {
             '<leader>jC',
             function()
                 require('jj.cmd').commit()
@@ -175,7 +166,7 @@ return {
         {
             '<leader>jph',
             function()
-                require('jj.diff').file_history()
+                require('jj.picker').file_history()
             end,
             desc = '[JJ] Pick File History',
         },
