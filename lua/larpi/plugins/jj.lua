@@ -1,6 +1,5 @@
 return {
     'nicolasgb/jj.nvim',
-    version = '*', -- Use latest stable release
     dependencies = {
         'esmuellert/codediff.nvim',
         'folke/snacks.nvim',
@@ -13,7 +12,6 @@ return {
             backend = 'codediff',
         },
     },
-    cmd = 'JJ',
     cmd = 'J',
     keys = {
         {
