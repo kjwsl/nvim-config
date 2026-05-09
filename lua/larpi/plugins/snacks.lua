@@ -98,6 +98,23 @@ return {
                 },
             },
             ui_select = true,
+            sources = {
+                lsp_references = {
+                    finder = function(opts, ctx)
+                        ctx.picker.seen = {}
+                        return require('snacks.picker.source.lsp').references(opts, ctx)
+                    end,
+                    transform = function(item, ctx)
+                        local seen = ctx.picker.seen
+                        local id = vim.inspect({ item.text })
+                        if seen[id] then
+                            return false
+                        end
+                        seen[id] = true
+                        return true
+                    end,
+                },
+            },
         },
         lazygit = { enabled = true },
         scratch = { enabled = true },
@@ -207,7 +224,7 @@ return {
             '<leader>fh',
             function()
                 Snacks.picker.help({
-                    pattern = larpi.fn.get_highlighted_text()
+                    pattern = larpi.fn.get_highlighted_text(),
                 })
             end,
             desc = '[Snacks.Picker] Help File',

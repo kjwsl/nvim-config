@@ -1,6 +1,6 @@
 return {
     'neovim/nvim-lspconfig',
-    event = { 'BufReadPre', 'BufNewFile' },
+    event = { 'BufReadPre', 'BufNew' },
     dependencies = {
         {
             'mason-org/mason.nvim',
@@ -25,6 +25,10 @@ return {
                     'lua_ls',
                     'clangd',
                     'tombi',
+                },
+                handlers = {
+                    -- Disable rust_analyzer so rustaceanvim can handle it
+                    rust_analyzer = function() end, 
                 },
             },
             dependencies = {
