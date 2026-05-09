@@ -47,6 +47,7 @@ vim.keymap.set('n', '<Leader>Tp', '<Cmd>tabprevious<CR>', { desc = '[Custom] Go 
 vim.keymap.set({ 'n', 'x' }, 'Zqq', '<Cmd>confirm qa<CR>', { desc = '[Custom] Exit NeoVim' })
 vim.keymap.set({ 'n', 'x' }, 'ZQ', '<Cmd>qa!<CR>', { desc = '[Custom] Exit NeoVim without saving' })
 vim.keymap.set({ 'n', 'x' }, 'Zww', '<Cmd>w<CR>', { desc = '[Custom] Write to Buffer' })
+vim.keymap.set({ 'n', 'x' }, '!', '<Cmd>w<CR>', { desc = '[Custom] Write to Buffer' })
 vim.keymap.set({ 'n', 'x' }, 'Zwa', '<Cmd>wa<CR>', { desc = '[Custom] Write All' })
 vim.keymap.set({ 'n', 'x' }, 'Zwq', '<Cmd>wq<CR>', { desc = '[Custom] Write and Quit' })
 vim.keymap.set({ 'n', 'x' }, 'ZwQ', '<Cmd>wqa<CR>', { desc = '[Custom] Write All and Quit' })

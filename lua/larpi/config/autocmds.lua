@@ -170,3 +170,11 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
     end,
 })
+
+vim.api.nvim_create_autocmd('BufWritePost', {
+    group = vim.api.nvim_create_augroup('BufWritePostGroup', {}),
+    desc = 'Notify after writing to a buffer',
+    callback = function(ev)
+        vim.notify('Written to the file `' .. vim.api.nvim_buf_get_name(ev.buf) .. '`.')
+    end,
+})
