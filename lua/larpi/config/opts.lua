@@ -7,6 +7,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.scrolloff = 100
+vim.o.sidescrolloff = 80
 if vim.fn.exists('+scrolloffpad') == 1 then
     vim.o.scrolloffpad = 1
 end
