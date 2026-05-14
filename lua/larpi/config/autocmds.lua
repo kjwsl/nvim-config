@@ -132,8 +132,24 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     desc = 'Automatically reload kitty config',
     pattern = '**/.config/kitty/*.conf',
     callback = function()
-        vim.cmd('silent !bash -c "kill -SIGUSR1 $(pgrep kitty)"')
+        vim.cmd('silent !bash -c "kitty @ load-config"')
         vim.notify('Reloaded Kitty config')
+    end,
+})
+
+vim.api.nvim_create_autocmd({ 'VimEnter', 'VimResume' }, {
+    group = vim.api.nvim_create_augroup('KittyFocus', {}),
+    desc = 'Tell Kitty that Neovim has focus',
+    callback = function()
+        io.stdout:write('\x1b]22;IS_NVIM=1\x1b\\')
+    end,
+})
+
+vim.api.nvim_create_autocmd({ 'VimLeave', 'VimSuspend' }, {
+    group = vim.api.nvim_create_augroup('KittyFocus', {}),
+    desc = 'Tell Kitty that Neovim has lost focus',
+    callback = function()
+        io.stdout:write('\x1b]22;IS_NVIM=\x1b\\')
     end,
 })
 
