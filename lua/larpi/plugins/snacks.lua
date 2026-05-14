@@ -14,10 +14,53 @@ local images = {
 math.randomseed(os.time())
 local logo = vim.fn.stdpath('config') .. '/images/' .. images[math.random(#images)]
 
-local dashboard_dimens = {
-    width = math.floor(vim.o.columns * 0.3),
-    height = math.floor(vim.o.lines * 0.6),
-}
+---@param width_scale number Percentage of screen width
+---@param height_scale number Percentage of screen height
+---@param gap_scale number Percentage of screen width
+local function get_dashboard_dimens(width_scale, height_scale, gap_scale)
+    local gap = math.floor(vim.o.columns * gap_scale)
+    local dashboard = {
+        width = math.floor(vim.o.columns * width_scale),
+        height = math.floor(vim.o.lines * height_scale),
+    }
+    local image = {
+        width = math.floor((dashboard.width - gap) / 2) - 2,
+        height = dashboard.height - 2,
+    }
+
+    return {
+        dashboard = dashboard,
+        image = image,
+        gap = gap,
+    }
+end
+
+local WIDTH_SCALE = 0.7
+local HEIGHT_SCALE = 0.7
+local GAP_SCALE = 0.04
+
+local dimens = get_dashboard_dimens(WIDTH_SCALE, HEIGHT_SCALE, GAP_SCALE)
+
+local function generate_dashboard_sections()
+    return {
+        {
+            section = 'terminal',
+            cmd = ('chafa %s --symbols all --view-size %dx%d --align center,center'):format(logo, dimens.image.width, dimens.image.height),
+            height = dimens.dashboard.height,
+        },
+        {
+            pane = 2,
+            height = dimens.dashboard.height,
+            { section = 'header', padding = 4 },
+            {
+                section = 'keys',
+                gap = 1,
+                padding = 5,
+            },
+            { section = 'startup' },
+        },
+    }
+end
 
 return {
     'folke/snacks.nvim',
@@ -34,7 +77,7 @@ return {
         bigfile = { enabled = true },
         bufdelete = { enabled = true }, -- Delete buffers without disrupting window layout.
         dashboard = {
-            pane_gap = 6,
+            pane_gap = dimens.gap,
             preset = {
                 keys = {
                     { icon = ' ', key = 'f', desc = 'Find File', action = ':lua Snacks.picker.files({ hidden = true, ignored = true})' },
@@ -56,24 +99,7 @@ return {
     ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
     ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝]],
             },
-            sections = {
-                {
-                    section = 'terminal',
-                    cmd = ('chafa %s --symbols all --view-size %dx%d --align center,center'):format(logo, dashboard_dimens.width, dashboard_dimens.height),
-                    height = dashboard_dimens.height,
-                },
-                {
-                    pane = 2,
-                    height = dashboard_dimens.height,
-                    { section = 'header', padding = 4 },
-                    {
-                        section = 'keys',
-                        gap = 1,
-                        padding = 5,
-                    },
-                    { section = 'startup' },
-                },
-            },
+            sections = generate_dashboard_sections(),
         },
         indent = { enabled = true },
         input = { enabled = true }, -- Better `vim.ui.input`.
@@ -289,6 +315,25 @@ return {
             self.win = vim.api.nvim_get_current_win()
             return self
         end
+    end,
+    config = function(_, opts)
+        require('snacks').setup(opts)
+
+        vim.api.nvim_create_autocmd('VimResized', {
+            group = vim.api.nvim_create_augroup('SnacksDashboardResize', { clear = true }),
+            callback = function()
+                local new_dimens = get_dashboard_dimens(WIDTH_SCALE, HEIGHT_SCALE, GAP_SCALE)
+
+                -- Update the cached configuration
+                Snacks.config.dashboard.pane_gap = new_dimens.gap
+                Snacks.config.dashboard.sections[1] = generate_dashboard_sections()
+                Snacks.config.dashboard.sections[2].height = new_dimens.dashboard.height
+
+                if vim.bo.filetype == 'snacks_dashboard' then
+                    Snacks.dashboard.update()
+                end
+            end,
+        })
     end,
     dependencies = {
         'nvim-treesitter/nvim-treesitter',
