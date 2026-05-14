@@ -1,18 +1,36 @@
 return {
     'ibhagwan/fzf-lua',
-    enabled = false,
+    event = 'VeryLazy',
     dependencies = { 'nvim-mini/mini.icons' },
     opts = {
         winopts = {
             preview = {
+                border = vim.g.winborder,
                 wrap = true,
                 hidden = false,
             },
         },
     },
+    config = function(_, opts)
+        local fzf_lua = require('fzf-lua')
+        fzf_lua.setup(opts)
+
+        local success = fzf_lua.register_ui_select()
+        if not success then
+            vim.notify('fzf-lua: Failed to register ui-select', vim.log.levels.WARN)
+        end
+    end,
     keys = {
         {
-            '<leader>fp',
+            '<C-x><C-f>',
+            function()
+                FzfLua.complete_path()
+            end,
+            mode = { 'n', 'x', 'i' },
+            desc = '[FzfLua] Path Completion',
+        },
+        {
+            '<Leader>fp',
             function()
                 require('fzf-lua').builtin()
             end,
@@ -20,7 +38,7 @@ return {
             desc = '[FzfLua] Pick',
         },
         {
-            '<leader>ff',
+            '<Leader>ff',
             function()
                 require('fzf-lua').files()
             end,
@@ -28,7 +46,7 @@ return {
             desc = '[FzfLua] Files',
         },
         {
-            '<leader>fc',
+            '<Leader>fc',
             function()
                 require('fzf-lua').files({ cwd = vim.fn.stdpath('config') })
             end,
@@ -36,7 +54,7 @@ return {
             desc = '[FzfLua] Neovim Files',
         },
         {
-            '<leader>f.',
+            '<Leader>f.',
             function()
                 require('fzf-lua').resume()
             end,
@@ -44,7 +62,7 @@ return {
             desc = '[FzfLua] Resume',
         },
         {
-            '<leader>fF',
+            '<Leader>fF',
             function()
                 require('fzf-lua').global()
             end,
@@ -52,7 +70,7 @@ return {
             desc = '[FzfLua] Global Search',
         },
         {
-            '<leader>fb',
+            '<Leader>fb',
             function()
                 require('fzf-lua').buffers()
             end,
@@ -60,7 +78,7 @@ return {
             desc = '[FzfLua] Buffers',
         },
         {
-            '<leader>fr',
+            '<Leader>fr',
             function()
                 require('fzf-lua').oldfiles()
             end,
@@ -68,7 +86,7 @@ return {
             desc = '[FzfLua] Recent',
         },
         {
-            '<leader>fH',
+            '<Leader>fH',
             function()
                 require('fzf-lua').history()
             end,
@@ -76,7 +94,7 @@ return {
             desc = '[FzfLua] History',
         },
         {
-            '<leader>fb',
+            '<Leader>sb',
             function()
                 require('fzf-lua').blines()
             end,
@@ -84,7 +102,7 @@ return {
             desc = '[FzfLua] Current Buffer Lines',
         },
         {
-            '<leader>fB',
+            '<Leader>sB',
             function()
                 require('fzf-lua').lines()
             end,
@@ -92,7 +110,7 @@ return {
             desc = '[FzfLua] Buffers Lines',
         },
         {
-            '<leader>ft',
+            '<Leader>st',
             function()
                 require('fzf-lua').treesitter()
             end,
@@ -100,7 +118,7 @@ return {
             desc = '[FzfLua] Treesitter',
         },
         {
-            '<leader>fT',
+            '<Leader>fT',
             function()
                 require('fzf-lua').tabs()
             end,
@@ -108,7 +126,7 @@ return {
             desc = '[FzfLua] Tabs',
         },
         {
-            '<leader>fv',
+            '<Leader>fv',
             function()
                 require('fzf-lua').vcs_files()
             end,
@@ -116,7 +134,7 @@ return {
             desc = '[FzfLua] VCS Files (Git/Jujutsu)',
         },
         {
-            '<leader>fh',
+            '<Leader>fh',
             function()
                 require('fzf-lua').helptags()
             end,
@@ -124,7 +142,7 @@ return {
             desc = '[FzfLua] Help',
         },
         {
-            '<leader>fm',
+            '<Leader>fm',
             function()
                 require('fzf-lua').manpages()
             end,
@@ -132,7 +150,7 @@ return {
             desc = '[FzfLua] Man Pages',
         },
         {
-            '<leader>fC',
+            '<Leader>fxc',
             function()
                 require('fzf-lua').commands()
             end,
@@ -140,7 +158,7 @@ return {
             desc = '[FzfLua] Commands',
         },
         {
-            '<leader>f:',
+            '<Leader>f:',
             function()
                 require('fzf-lua').command_history()
             end,
@@ -148,7 +166,7 @@ return {
             desc = '[FzfLua] Command History',
         },
         {
-            '<leader>f"',
+            '<Leader>f"',
             function()
                 require('fzf-lua').registers()
             end,
@@ -156,7 +174,7 @@ return {
             desc = '[FzfLua] Registers',
         },
         {
-            '<leader>fxc',
+            '<Leader>fC',
             function()
                 require('fzf-lua').changes()
             end,
@@ -164,7 +182,7 @@ return {
             desc = '[FzfLua] Changes',
         },
         {
-            '<leader>fu',
+            '<Leader>fu',
             function()
                 require('fzf-lua').undotree()
             end,
@@ -172,7 +190,7 @@ return {
             mode = { 'n', 'x' },
         },
         {
-            '<leader>fk',
+            '<Leader>fk',
             function()
                 require('fzf-lua').keymaps()
             end,
@@ -180,7 +198,7 @@ return {
             mode = { 'n', 'x' },
         },
         {
-            '<leader>fj',
+            '<Leader>fJ',
             function()
                 require('fzf-lua').jumps()
             end,
@@ -188,7 +206,7 @@ return {
             desc = '[FzfLua] Jumps',
         },
         {
-            '<leader>fa',
+            '<Leader>fa',
             function()
                 require('fzf-lua').autocmds()
             end,
@@ -196,7 +214,7 @@ return {
             desc = '[FzfLua] Autocmds',
         },
         {
-            '<leader>fxt',
+            '<Leader>fxt',
             function()
                 require('fzf-lua').tmux_buffers()
             end,
@@ -204,7 +222,7 @@ return {
             desc = '[FzfLua] Tmux Buffers',
         },
         {
-            '<leader>fz',
+            '<Leader>fz',
             function()
                 require('fzf-lua').zoxide()
             end,
@@ -214,7 +232,7 @@ return {
 
         -- Grep
         {
-            '<leader>sg',
+            '<Leader>sg',
             function()
                 require('fzf-lua').live_grep()
             end,
@@ -222,7 +240,7 @@ return {
             desc = '[FzfLua] Grep',
         },
         {
-            '<leader>sc',
+            '<Leader>sc',
             function()
                 require('fzf-lua').live_grep({ cwd = vim.fn.stdpath('config') })
             end,
@@ -230,21 +248,21 @@ return {
             desc = '[FzfLua] Grep Neovim',
         },
         {
-            '<leader>sw',
+            '<Leader>sw',
             function()
                 require('fzf-lua').grep_cword()
             end,
             desc = '[FzfLua] Grep Word',
         },
         {
-            '<leader>sW',
+            '<Leader>sW',
             function()
                 require('fzf-lua').grep_cWORD()
             end,
             desc = '[FzfLua] Grep WORD',
         },
         {
-            '<leader>sw',
+            '<Leader>sw',
             function()
                 require('fzf-lua').grep_visual()
             end,
@@ -252,7 +270,7 @@ return {
             desc = '[FzfLua] Grep Selection',
         },
         {
-            '<leader>sl',
+            '<Leader>sl',
             function()
                 require('fzf-lua').grep_loclist()
             end,
@@ -317,27 +335,76 @@ return {
             desc = '[FzfLua] LSP Code Actions',
         },
         {
-            '<leader>sd',
+            '<Leader>fd',
             function()
                 require('fzf-lua').diagnostics_document()
             end,
             desc = '[FzfLua] Diagnostics Document',
         },
         {
-            '<leader>sD',
+            '<Leader>fD',
             function()
                 require('fzf-lua').diagnostics_workspace()
             end,
             desc = '[FzfLua] Diagnostics Workspace',
         },
-
         -- Jujutsu
         {
-            '<leader>jsf',
+            '<Leader>fj',
             function()
                 require('fzf-lua').jj_files()
             end,
             desc = '[FzfLua] Jujutsu Files',
         },
+        -- Git
+        {
+            '<Leader>gs',
+            function()
+                require('fzf-lua').git_status()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] Git Status',
+        },
+        {
+            '<Leader>gb',
+            function()
+                require('fzf-lua').git_blame()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] Git Blame',
+        },
+        {
+            '<Leader>gr',
+            function()
+                require('fzf-lua').git_reflog()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] Git Reflog',
+        },
+
+        {
+            '<Leader>gc',
+            function()
+                require('fzf-lua').git_commits()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] Git Commits',
+        },
+        {
+            '<Leader>gC',
+            function()
+                require('fzf-lua').git_bcommits()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] Git Buffer Commits',
+        },
+        {
+            '<Leader>gd',
+            function()
+                require('fzf-lua').git_diff()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] Git Diff',
+        },
     },
-},
+}

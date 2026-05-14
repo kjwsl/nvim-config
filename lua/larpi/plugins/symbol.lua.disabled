@@ -7,10 +7,10 @@ return {
         'SymbolsClose',
     },
     keys = {
-        { '<leader>ts', mode = 'n', desc = 'Toggle Symbols' },
-        { ',s', '<cmd> Symbols<CR>', desc = 'Symbols' },
-        { ',S', '<cmd> SymbolsClose<CR>', desc = 'Symbols Close' },
-        { 'ts', '<cmd> SymbolsToggle<CR>', desc = 'Symbols Toggle' },
+        { '<Leader>ts', mode = 'n', desc = 'Toggle Symbols' },
+        { ',s', '<Cmd> Symbols<CR>', desc = 'Symbols' },
+        { ',S', '<Cmd> SymbolsClose<CR>', desc = 'Symbols Close' },
+        { 'ts', '<Cmd> SymbolsToggle<CR>', desc = 'Symbols Toggle' },
     },
     config = function()
         local opts = {

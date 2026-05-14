@@ -29,7 +29,7 @@ return {
     keys = {
         -- Recommended/example keymaps
         {
-            '<leader>aoa',
+            '<Leader>aoa',
             function()
                 require('opencode').ask('@this: ', { submit = true })
             end,
@@ -37,7 +37,7 @@ return {
             desc = '[Opencode] Ask opencode…',
         },
         {
-            '<leader>aox',
+            '<Leader>aox',
             function()
                 require('opencode').select()
             end,
@@ -45,7 +45,7 @@ return {
             desc = '[Opencode] Execute opencode action…',
         },
         {
-            '<leader>aot',
+            '<Leader>aot',
             function()
                 require('opencode').toggle()
             end,

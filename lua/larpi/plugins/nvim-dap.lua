@@ -32,42 +32,42 @@ return {
     cmd = { 'DapToggleBreakpoint', 'DapContinue', 'DapStepInto', 'DapStepOver', 'DapTerminate' },
     keys = {
         {
-            '<leader>db',
+            '<Leader>db',
             function()
                 require('dap').toggle_breakpoint()
             end,
             desc = '[DAP] Toggle Breakpoint',
         },
         {
-            '<leader>dc',
+            '<Leader>dc',
             function()
                 require('dap').continue()
             end,
             desc = '[DAP] Continue',
         },
         {
-            '<leader>di',
+            '<Leader>di',
             function()
                 require('dap').step_into()
             end,
             desc = '[DAP] Step Into',
         },
         {
-            '<leader>do',
+            '<Leader>do',
             function()
                 require('dap').step_over()
             end,
             desc = '[DAP] Step Over',
         },
         {
-            '<leader>dt',
+            '<Leader>dt',
             function()
                 require('dap').terminate()
             end,
             desc = '[DAP] Terminate',
         },
         {
-            '<leader>du',
+            '<Leader>du',
             function()
                 require('dapui').toggle()
             end,

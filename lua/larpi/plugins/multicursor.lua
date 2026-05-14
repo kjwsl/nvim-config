@@ -3,7 +3,7 @@ return {
     branch = '1.0',
     keys = {
         {
-            '<leader><leader>k',
+            '<Leader><Leader>k',
             function()
                 require('multicursor-nvim').lineAddCursor(-1)
             end,
@@ -11,7 +11,7 @@ return {
             desc = '[Multicursor] Add cursor above',
         },
         {
-            '<leader><leader>j',
+            '<Leader><Leader>j',
             function()
                 require('multicursor-nvim').lineAddCursor(1)
             end,
@@ -35,7 +35,7 @@ return {
             desc = '[Multicursor] Add cursor below',
         },
         {
-            '<leader><up>',
+            '<Leader><up>',
             function()
                 require('multicursor-nvim').lineSkipCursor(-1)
             end,
@@ -43,7 +43,7 @@ return {
             desc = '[Multicursor] Skip cursor above',
         },
         {
-            '<leader><down>',
+            '<Leader><down>',
             function()
                 require('multicursor-nvim').lineSkipCursor(1)
             end,
@@ -53,7 +53,7 @@ return {
 
         -- Add or skip adding a new cursor by matching word/selection
         {
-            '<leader><leader>a',
+            '<Leader><Leader>a',
             function()
                 require('multicursor-nvim').matchAllAddCursors()
             end,
@@ -61,7 +61,7 @@ return {
             desc = '[Multicursor] Add Cursor to All Matches',
         },
         {
-            '<leader><leader>n',
+            '<Leader><Leader>n',
             function()
                 require('multicursor-nvim').matchAddCursor(1)
             end,
@@ -69,7 +69,7 @@ return {
             desc = '[Multicursor] Add Cursor to Next Match',
         },
         {
-            '<leader><leader>s',
+            '<Leader><Leader>s',
             function()
                 require('multicursor-nvim').matchSkipCursor(1)
             end,
@@ -77,7 +77,7 @@ return {
             desc = '[Multicursor] Skip Cursor to Next Match',
         },
         {
-            '<leader><leader>N',
+            '<Leader><Leader>N',
             function()
                 require('multicursor-nvim').matchAddCursor(-1)
             end,
@@ -85,7 +85,7 @@ return {
             desc = '[Multicursor] Add Cursor to Previous Match',
         },
         {
-            '<leader><leader>S',
+            '<Leader><Leader>S',
             function()
                 require('multicursor-nvim').matchSkipCursor(-1)
             end,
@@ -152,7 +152,7 @@ return {
             layerSet({ 'n', 'x' }, '<right>', mc.nextCursor)
 
             -- Delete the main cursor.
-            layerSet({ 'n', 'x' }, '<leader>x', mc.deleteCursor)
+            layerSet({ 'n', 'x' }, '<Leader>x', mc.deleteCursor)
 
             -- Enable and clear cursors using escape.
             layerSet('n', '<esc>', function()

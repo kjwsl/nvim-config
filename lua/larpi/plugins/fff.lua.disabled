@@ -3,41 +3,84 @@ return {
     build = function()
         require('fff.download').download_or_build_binary()
     end,
-    opts = {
-    },
-    lazy = false,
+    opts = {},
     keys = {
         {
-            'ff', -- try it if you didn't it is a banger keybinding for a picker
+            '<Leader>ff', -- try it if you didn't it is a banger keybinding for a picker
             function()
                 require('fff').find_files()
             end,
-            desc = 'FFFind files',
+            desc = '[FFF] Find Files',
         },
         {
-            'fg',
+            '<Leader>fc', -- try it if you didn't it is a banger keybinding for a picker
             function()
-                require('fff').live_grep()
-            end,
-            desc = 'LiFFFe grep',
-        },
-        {
-            'fz',
-            function()
-                require('fff').live_grep({
-                    grep = {
-                        modes = { 'fuzzy', 'plain' },
-                    },
+                require('fff').find_files({
+                    cwd = vim.fn.stdpath('config'),
                 })
             end,
-            desc = 'Live fffuzy grep',
+            desc = '[FFF] Search Neovim Config',
         },
         {
-            'fc',
+            '<Leader>fw', -- try it if you didn't it is a banger keybinding for a picker
             function()
-                require('fff').live_grep({ query = vim.fn.expand('<cword>') })
+                require('fff').find_files({
+                    query = vim.fn.expand('<cword>'),
+                })
             end,
-            desc = 'Search current word',
+            desc = '[FFF] Find Word',
+        },
+        {
+            '<Leader>fW', -- try it if you didn't it is a banger keybinding for a picker
+            function()
+                require('fff').find_files({
+                    query = vim.fn.expand('<cWORD>'),
+                })
+            end,
+            desc = '[FFF] Find WORD',
+        },
+        {
+            {
+                '<Leader>sg',
+                function()
+                    require('fff').live_grep()
+                end,
+                desc = '[FFF] Grep',
+            },
+            {
+                '<Leader>sG',
+                function()
+                    require('fff').live_grep({
+                        grep = {
+                            modes = { 'fuzzy', 'plain' },
+                        },
+                    })
+                end,
+                desc = '[FFF] Fuzzy Grep',
+            },
+            {
+                '<Leader>sc',
+                function()
+                    require('fff').live_grep({
+                        cwd = vim.fn.stdpath('config'),
+                    })
+                end,
+                desc = '[FFF] Search Neovim Config',
+            },
+            {
+                '<Leader>sw',
+                function()
+                    require('fff').live_grep({ query = vim.fn.expand('<cword>') })
+                end,
+                desc = '[FFF] Search Word',
+            },
+            {
+                '<Leader>sW',
+                function()
+                    require('fff').live_grep({ query = vim.fn.expand('<cWORD>') })
+                end,
+                desc = '[FFF] Search WORD',
+            },
         },
     },
 }

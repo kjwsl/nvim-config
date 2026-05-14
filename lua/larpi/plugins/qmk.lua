@@ -47,7 +47,7 @@ return {
     branch = 'test',
     cmd = 'QMKFormat',
     keys = {
-        { '<leader>qf', '<cmd>QMKFormat<cr>', desc = 'Format QMK' },
+        { '<Leader>qf', '<Cmd>QMKFormat<CR>', desc = 'Format QMK' },
     },
     opts = voyager,
 }

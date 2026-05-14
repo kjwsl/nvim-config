@@ -3,33 +3,33 @@ return {
     branch = 'main', -- IMPORTANT!
     keys = {
         {
-            '<leader>xx',
-            '<cmd>Trouble diagnostics toggle<cr>',
+            '<Leader>xx',
+            '<Cmd>Trouble diagnostics toggle<CR>',
             desc = 'Diagnostics (Trouble)',
         },
         {
-            '<leader>xX',
-            '<cmd>Trouble diagnostics toggle filter.buf=0<cr>',
+            '<Leader>xX',
+            '<Cmd>Trouble diagnostics toggle filter.buf=0<CR>',
             desc = 'Buffer Diagnostics (Trouble)',
         },
         {
-            '<leader>cs',
-            '<cmd>Trouble symbols toggle focus=false<cr>',
+            '<Leader>cs',
+            '<Cmd>Trouble symbols toggle focus=false<CR>',
             desc = 'Symbols (Trouble)',
         },
         {
-            '<leader>cl',
-            '<cmd>Trouble lsp toggle focus=false win.position=right<cr>',
+            '<Leader>cl',
+            '<Cmd>Trouble lsp toggle focus=false win.position=right<CR>',
             desc = 'LSP Definitions / references / ... (Trouble)',
         },
         {
-            '<leader>xL',
-            '<cmd>Trouble loclist toggle<cr>',
+            '<Leader>xL',
+            '<Cmd>Trouble loclist toggle<CR>',
             desc = 'Location List (Trouble)',
         },
         {
-            '<leader>xQ',
-            '<cmd>Trouble qflist toggle<cr>',
+            '<Leader>xQ',
+            '<Cmd>Trouble qflist toggle<CR>',
             desc = 'Quickfix List (Trouble)',
         },
     },

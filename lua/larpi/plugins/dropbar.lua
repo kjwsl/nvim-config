@@ -10,21 +10,21 @@ return {
     },
     keys = {
         {
-            '<leader>;',
+            '<Leader>;',
             function()
                 require('dropbar.api').pick()
             end,
             desc = '[Dropbar] Pick symbols',
         },
         {
-            '<leader>[;',
+            '<Leader>[;',
             function()
                 require('dropbar.api').goto_context_start()
             end,
             desc = '[Dropbar] Go to start of current context',
         },
         {
-            '<leader>];',
+            '<Leader>];',
             function()
                 require('dropbar.api').select_next_context()
             end,

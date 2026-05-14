@@ -11,14 +11,14 @@ return {
     cmd = 'Neojj',
     keys = {
         {
-            '<leader>jj',
+            '<Leader>jj',
             function()
                 require('neojj').open()
             end,
             desc = '[Neojj] Show Neojj UI',
         },
         {
-            '<leader>jc',
+            '<Leader>jc',
             function()
                 require('neojj').open({ cwd = vim.fn.stdpath('config') })
             end,

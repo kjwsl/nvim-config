@@ -8,14 +8,14 @@ return {
     cmd = 'CodeCompanion',
     keys = {
         {
-            '<leader>acc',
+            '<Leader>acc',
             function()
                 require('codecompanion').chat()
             end,
             desc = '[CodeCompanion] Chat',
         },
         {
-            '<leader>act',
+            '<Leader>act',
             function()
                 require('codecompanion').toggle()
             end,

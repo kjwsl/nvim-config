@@ -3,7 +3,7 @@ return {
     event = 'VeryLazy',
     keys = {
         {
-            '<leader>?',
+            '<Leader>?',
             function()
                 require('which-key').show({ global = false })
             end,

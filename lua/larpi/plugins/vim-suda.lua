@@ -2,8 +2,8 @@ return {
     -- Sudo write/read
     'lambdalisue/vim-suda',
     keys = {
-        { '<leader>Sw', '<cmd>SudaWrite<cr>', mode = 'n', desc = '[Suda] Sudo Write' },
-        { '<leader>Sr', '<cmd>SudaRead<cr>', mode = 'n', desc = '[Suda] Sudo Read' },
+        { '<Leader>Sw', '<Cmd>SudaWrite<CR>', mode = 'n', desc = '[Suda] Sudo Write' },
+        { '<Leader>Sr', '<Cmd>SudaRead<CR>', mode = 'n', desc = '[Suda] Sudo Read' },
     },
     cmd = { 'SudaWrite', 'SudaRead' },
     init = function()

@@ -10,7 +10,7 @@ return {
     },
     keys = {
         {
-            '<leader>Se',
+            '<Leader>Se',
             function()
                 require('scissors').editSnippet()
             end,
@@ -18,7 +18,7 @@ return {
             desc = '[Scissors]  edit snippet',
         },
         {
-            '<leader>Sa',
+            '<Leader>Sa',
             function()
                 require('scissors').addNewSnippet()
             end,

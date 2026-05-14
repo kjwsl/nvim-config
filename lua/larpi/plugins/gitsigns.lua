@@ -29,7 +29,7 @@ return {
 
         -- Actions
         {
-            '<leader>hs',
+            '<Leader>hs',
             function()
                 require('gitsigns').stage_hunk()
             end,
@@ -37,7 +37,7 @@ return {
             desc = '[GitSigns] Stage Hunk',
         },
         {
-            '<leader>hr',
+            '<Leader>hr',
             function()
                 require('gitsigns').reset_hunk()
             end,
@@ -45,7 +45,7 @@ return {
             desc = '[GitSigns] Reset Hunk',
         },
         {
-            '<leader>hs',
+            '<Leader>hs',
             function()
                 require('gitsigns').stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
             end,
@@ -53,7 +53,7 @@ return {
             desc = '[GitSigns] Stage Hunk',
         },
         {
-            '<leader>hr',
+            '<Leader>hr',
             function()
                 require('gitsigns').reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
             end,
@@ -62,7 +62,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hS',
+            '<Leader>hS',
             function()
                 require('gitsigns').stage_buffer()
             end,
@@ -70,7 +70,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hu',
+            '<Leader>hu',
             function()
                 require('gitsigns').undo_stage_hunk()
             end,
@@ -78,7 +78,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hR',
+            '<Leader>hR',
             function()
                 require('gitsigns').reset_buffer()
             end,
@@ -86,7 +86,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hp',
+            '<Leader>hp',
             function()
                 require('gitsigns').preview_hunk()
             end,
@@ -94,7 +94,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hb',
+            '<Leader>hb',
             function()
                 require('gitsigns').blame_line({ full = true })
             end,
@@ -102,7 +102,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>tb',
+            '<Leader>tb',
             function()
                 require('gitsigns').toggle_current_line_blame()
             end,
@@ -110,7 +110,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hd',
+            '<Leader>hd',
             function()
                 require('gitsigns').diffthis()
             end,
@@ -118,7 +118,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>hD',
+            '<Leader>hD',
             function()
                 require('gitsigns').diffthis('~')
             end,
@@ -126,7 +126,7 @@ return {
         },
         {
             mode = 'n',
-            '<leader>td',
+            '<Leader>td',
             function()
                 require('gitsigns').toggle_deleted()
             end,

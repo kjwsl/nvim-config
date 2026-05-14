@@ -8,13 +8,13 @@ return {
         'ObsidianSearch',
     },
     keys = {
-        { '<leader>Off', '<cmd>ObsidianQuickSwitch<cr>', mode = 'n', desc = 'Search Obsidian Vault' },
-        { '<leader>Ogg', '<cmd>ObsidianSearch<cr>', mode = 'n', desc = 'Grep Obsidian Vault' },
-        { '<leader>Ot', '<cmd>ObsidianTOC<cr>', mode = 'n', desc = 'Search Obsidian TOC' },
-        { '<leader>Oft', '<cmd>ObsidianTags<cr>', mode = 'n', desc = 'Find Obsidian Tags' },
-        { '<leader>Oj', '<cmd>ObsidianDailies<cr>', mode = 'n', desc = 'Obsidian Journal' },
+        { '<Leader>Off', '<Cmd>ObsidianQuickSwitch<CR>', mode = 'n', desc = 'Search Obsidian Vault' },
+        { '<Leader>Ogg', '<Cmd>ObsidianSearch<CR>', mode = 'n', desc = 'Grep Obsidian Vault' },
+        { '<Leader>Ot', '<Cmd>ObsidianTOC<CR>', mode = 'n', desc = 'Search Obsidian TOC' },
+        { '<Leader>Oft', '<Cmd>ObsidianTags<CR>', mode = 'n', desc = 'Find Obsidian Tags' },
+        { '<Leader>Oj', '<Cmd>ObsidianDailies<CR>', mode = 'n', desc = 'Obsidian Journal' },
         {
-            '<leader>Ofw',
+            '<Leader>Ofw',
             function()
                 local obsidian = require('obsidian')
                 local client = obsidian.get_client()
@@ -35,7 +35,7 @@ return {
             desc = 'Search Obsidian Workspace',
         },
         {
-            '<leader>Op',
+            '<Leader>Op',
             function()
                 local obsidian = require('obsidian')
                 local client = obsidian.get_client()
@@ -54,7 +54,7 @@ return {
             desc = 'Obsidian Pull',
         },
         {
-            '<leader>Os',
+            '<Leader>Os',
             function()
                 local obsidian = require('obsidian')
                 local client = obsidian.get_client()
@@ -137,14 +137,14 @@ return {
                     opts = { noremap = false, expr = true, buffer = true },
                 },
                 -- Toggle check-boxes.
-                ['<leader>ch'] = {
+                ['<Leader>ch'] = {
                     action = function()
                         return require('obsidian').util.toggle_checkbox()
                     end,
                     opts = { buffer = true },
                 },
                 -- Smart action depending on context, either follow link or toggle checkbox.
-                ['<cr>'] = {
+                ['<CR>'] = {
                     action = function()
                         return require('obsidian').util.smart_action()
                     end,

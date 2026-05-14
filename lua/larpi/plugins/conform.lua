@@ -30,7 +30,7 @@ return {
     },
     keys = {
         {
-            '<leader>cf',
+            '<Leader>cf',
             function()
                 require('conform').format({ async = true }, function(err)
                     if err then

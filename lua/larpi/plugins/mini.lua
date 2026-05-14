@@ -4,7 +4,7 @@ return {
     version = false,
     keys = {
         {
-            '<leader>tm',
+            '<Leader>tm',
             function()
                 require('mini.files').open()
             end,
@@ -62,16 +62,16 @@ return {
         require('mini.move').setup({
             mappings = {
                 -- In Visual Mode
-                left = '<leader>mh',
-                right = '<leader>ml',
-                down = '<leader>mj',
-                up = '<leader>mk',
+                left = '<Leader>mh',
+                right = '<Leader>ml',
+                down = '<Leader>mj',
+                up = '<Leader>mk',
 
                 -- In Normal Mode
-                line_left = '<leader>mh',
-                line_right = '<leader>ml',
-                line_down = '<leader>mj',
-                line_up = '<leader>mk',
+                line_left = '<Leader>mh',
+                line_right = '<Leader>ml',
+                line_down = '<Leader>mj',
+                line_up = '<Leader>mk',
             },
         })
         require('mini.sessions').setup({

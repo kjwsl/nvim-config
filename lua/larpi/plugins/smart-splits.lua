@@ -2,6 +2,7 @@ return {
     'mrjones2014/smart-splits.nvim',
     version = '>=1.0.0',
     event = 'VeryLazy',
+    lazy = false,
     opts = {
         multiplexer_integration = true,
         zellij_move_focus_or_tab = true,
@@ -62,25 +63,25 @@ return {
             end,
         },
         {
-            '<leader><leader>h',
+            '<Leader><Leader>h',
             function()
                 require('smart-splits').swap_buf_left()
             end,
         },
         {
-            '<leader><leader>j',
+            '<Leader><Leader>j',
             function()
                 require('smart-splits').swap_buf_down()
             end,
         },
         {
-            '<leader><leader>k',
+            '<Leader><Leader>k',
             function()
                 require('smart-splits').swap_buf_up()
             end,
         },
         {
-            '<leader><leader>l',
+            '<Leader><Leader>l',
             function()
                 require('smart-splits').swap_buf_right()
             end,

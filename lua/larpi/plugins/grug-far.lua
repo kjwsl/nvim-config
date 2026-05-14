@@ -3,7 +3,7 @@ return {
     cmd = { 'GrugFar', 'GrugFarWithin' },
     keys = {
         {
-            '<leader>rg',
+            '<Leader>rg',
             function()
                 require('grug-far').open()
             end,
@@ -11,7 +11,7 @@ return {
             desc = '[GrugFar] Open GrugFar',
         },
         {
-            '<leader>rg',
+            '<Leader>rg',
             function()
                 require('grug-far').with_visual_selection()
             end,

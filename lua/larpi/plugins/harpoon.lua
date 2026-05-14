@@ -10,7 +10,7 @@ return {
     },
     keys = {
         {
-            '<leader>Ha',
+            '<Leader>Ha',
             function()
                 require('harpoon'):list():add()
                 local pos = vim.api.nvim_win_get_cursor(0)
@@ -20,7 +20,7 @@ return {
             desc = '[Harpoon] Add',
         },
         {
-            '<leader>He',
+            '<Leader>He',
             function()
                 local use_default = false
                 local harpoon = require('harpoon')
@@ -96,42 +96,42 @@ return {
             desc = '[Harpoon] Open Menu',
         },
         {
-            '<leader>H1',
+            '<Leader>H1',
             function()
                 require('harpoon'):list():select(1)
             end,
             desc = '[Harpoon] Harpoon Mark 1',
         },
         {
-            '<leader>H2',
+            '<Leader>H2',
             function()
                 require('harpoon'):list():select(2)
             end,
             desc = '[Harpoon] Harpoon Mark 2',
         },
         {
-            '<leader>H3',
+            '<Leader>H3',
             function()
                 require('harpoon'):list():select(3)
             end,
             desc = '[Harpoon] Harpoon Mark 3',
         },
         {
-            '<leader>H4',
+            '<Leader>H4',
             function()
                 require('harpoon'):list():select(4)
             end,
             desc = '[Harpoon] Harpoon Mark 4',
         },
         {
-            '<leader>Hp',
+            '<Leader>Hp',
             function()
                 require('harpoon'):list():prev()
             end,
             desc = '[Harpoon] Previous',
         },
         {
-            '<leader>Hp',
+            '<Leader>Hp',
             function()
                 require('harpoon'):list():next()
             end,

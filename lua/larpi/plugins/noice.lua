@@ -31,7 +31,7 @@ return {
         'rcarriga/nvim-notify',
     },
     keys = {
-        { '<leader>nd', '<Cmd>NoiceDismiss<CR>', desc = '[Noice] Dismiss Notification', silent = true },
+        { '<Leader>nd', '<Cmd>NoiceDismiss<CR>', desc = '[Noice] Dismiss Notification', silent = true },
     },
     config = function(_, opts)
         require('noice').setup(opts) vim.api.nvim_create_autocmd('RecordingEnter', {

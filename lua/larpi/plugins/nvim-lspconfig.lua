@@ -14,7 +14,7 @@ return {
                 'MasonUpdate',
             },
             keys = {
-                { '<leader>mm', '<cmd>Mason<cr>', desc = '[Mason] Open Mason', silent = true },
+                { '<Leader>mm', '<Cmd>Mason<CR>', desc = '[Mason] Open Mason', silent = true },
             },
         },
         {

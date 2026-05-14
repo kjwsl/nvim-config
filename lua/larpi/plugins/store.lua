@@ -3,7 +3,7 @@ return {
     'alex-popov-tech/store.nvim',
     cmd = 'Store',
     keys = {
-        { '<leader>ps', '<cmd>Store<cr>', desc = '[Store] Open Plugin Store' },
+        { '<Leader>ps', '<Cmd>Store<CR>', desc = '[Store] Open Plugin Store' },
     },
     opts = {
         telemetry = false,

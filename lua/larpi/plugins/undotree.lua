@@ -5,7 +5,7 @@ return {
     opts = {},
     keys = { -- load the plugin only when using it's keybinding:
         {
-            '<leader>tu',
+            '<Leader>tu',
             function()
                 require('undotree').toggle()
             end,

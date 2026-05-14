@@ -7,21 +7,21 @@ return {
     },
     keys = {
         {
-            '<leader>-',
-            '<cmd>Yazi<cr>',
+            '<Leader>-',
+            '<Cmd>Yazi<CR>',
             mode = { 'n', 'x' },
             desc = '[Yazi] Open yazi at the current file',
         },
         {
-            '<leader>ty',
-            '<cmd>Yazi<cr>',
+            '<Leader>ty',
+            '<Cmd>Yazi<CR>',
             mode = { 'n', 'x' },
             desc = '[Yazi] Open yazi at the current file',
         },
         {
             -- Open in the current working directory
-            '<leader>tY',
-            '<cmd>Yazi cwd<cr>',
+            '<Leader>tY',
+            '<Cmd>Yazi cwd<CR>',
             desc = "[Yazi] Open the file manager in nvim's working directory",
         },
     },

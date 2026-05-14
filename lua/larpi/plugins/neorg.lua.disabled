@@ -5,12 +5,12 @@ return {
     cmd = 'Neorg',
     version = '*', -- Pin Neorg to the latest stable release
     keys = {
-        { '<leader>no', '<cmd>Neorg<CR>', desc = 'Open Neorg', mode = 'n' },
-        { '<leader>nw', desc = 'Open Neorg Workspace' },
-        { '<leader>nfh', '<Plug>(neorg.telescope.search_headings)', desc = 'Find Norg Headings' },
-        { '<leader>nff', '<Plug>(neorg.telescope.find_norg_files)', desc = 'Find Norg Files' },
-        { '<leader>nfb', '<Plug>(neorg.telescope.backlinks.file_backlinks)', desc = 'Find Backlinks' },
-        { '<leader>nfB', '<Plug>(neorg.telescope.backlinks.header_backlinks)', desc = 'Find Header Backlinks' },
+        { '<Leader>no', '<Cmd>Neorg<CR>', desc = 'Open Neorg', mode = 'n' },
+        { '<Leader>nw', desc = 'Open Neorg Workspace' },
+        { '<Leader>nfh', '<Plug>(neorg.telescope.search_headings)', desc = 'Find Norg Headings' },
+        { '<Leader>nff', '<Plug>(neorg.telescope.find_norg_files)', desc = 'Find Norg Files' },
+        { '<Leader>nfb', '<Plug>(neorg.telescope.backlinks.file_backlinks)', desc = 'Find Backlinks' },
+        { '<Leader>nfB', '<Plug>(neorg.telescope.backlinks.header_backlinks)', desc = 'Find Header Backlinks' },
         { '<localleader>niL', '<Plug>(neorg.telescope.insert_file_link)', desc = 'Insert File Link' },
         { '<localleader>nil', '<Plug>(neorg.telescope.insert_link)', desc = 'Insert Link' },
         { '<C-@>', '<C-Space>', mode = { 'i', 'x', 'n' }, desc = 'Continue Current Object' },
@@ -99,7 +99,7 @@ return {
                 vim.keymap.set({ 'i', 'x', 'n' }, '<S-CR>', '<Plug>(neorg.itero.next-iteration)', { desc = 'Continue Current Object' })
                 vim.keymap.set({ 'i', 'x', 'n' }, '<C-Space>', '<Plug>(neorg.itero.next-iteration)', { desc = 'Continue Current Object' })
                 vim.keymap.set({ 'i', 'x', 'n' }, '<C-S-a>', '<Plug>(neorg.itero.next-iteration)', { desc = 'Continue Current Object' })
-                vim.keymap.set('', '<localleader>Tc', '<cmd>Neorg toggle-concealer<cr>', { desc = 'Toggle Concealer' })
+                vim.keymap.set('', '<localleader>Tc', '<Cmd>Neorg toggle-concealer<CR>', { desc = 'Toggle Concealer' })
             end,
         })
     end,

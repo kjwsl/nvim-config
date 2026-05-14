@@ -3,7 +3,7 @@ return {
     ft = { 'org' },
     keys = {
         {
-            '<leader>oo',
+            '<Leader>oo',
             function()
                 require('orgmode').setup()
                 vim.cmd('e ~/obsidian-vault/')
@@ -11,14 +11,14 @@ return {
             desc = 'Open Orgmode',
         },
         {
-            '<leader>of',
+            '<Leader>of',
             function()
                 require('fzf-lua').files({ cwd = '~/obsidian-vault/' })
             end,
             desc = 'Find Org Files',
         },
         {
-            '<leader>oj',
+            '<Leader>oj',
             function()
                 local org_path = '~/obsidian-vault/'
                 local today = os.date('*t')

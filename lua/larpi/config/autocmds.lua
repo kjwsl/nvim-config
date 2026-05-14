@@ -130,9 +130,10 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('BufWritePost', {
     group = vim.api.nvim_create_augroup('ReloadKitty', {}),
     desc = 'Automatically reload kitty config',
-    pattern = '*/kitty.conf',
+    pattern = vim.fn.expand('~/.config/kitty/*.conf'),
     callback = function()
         vim.cmd('silent !bash -c "kill -SIGUSR1 $(pgrep kitty)"')
+        vim.notify('Reloaded Kitty config')
     end,
 })
 
