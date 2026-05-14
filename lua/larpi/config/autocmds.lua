@@ -130,7 +130,7 @@ vim.api.nvim_create_autocmd('FileType', {
 vim.api.nvim_create_autocmd('BufWritePost', {
     group = vim.api.nvim_create_augroup('ReloadKitty', {}),
     desc = 'Automatically reload kitty config',
-    pattern = vim.fn.expand('~/.config/kitty/*.conf'),
+    pattern = '**/.config/kitty/*.conf',
     callback = function()
         vim.cmd('silent !bash -c "kill -SIGUSR1 $(pgrep kitty)"')
         vim.notify('Reloaded Kitty config')
@@ -152,6 +152,9 @@ vim.api.nvim_create_autocmd('VimEnter', {
     callback = function()
         if vim.fn.argc() > 0 then
             local arg = vim.fn.argv(0)
+            if type(arg) ~= 'string' then
+                return
+            end
 
             if vim.fn.isdirectory(arg) == 1 then
                 vim.api.nvim_set_current_dir(arg)
