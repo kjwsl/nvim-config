@@ -323,7 +323,7 @@ return {
         {
             'grco',
             function()
-                require('fzf-lua').lsp_outcoming_calls()
+                require('fzf-lua').lsp_outgoing_calls()
             end,
             desc = '[FzfLua] LSP Outcoming Calls',
         },
@@ -337,16 +337,16 @@ return {
         {
             '<Leader>fd',
             function()
-                require('fzf-lua').diagnostics_document()
+                require('fzf-lua').diagnostics_workspace()
             end,
-            desc = '[FzfLua] Diagnostics Document',
+            desc = '[FzfLua] Diagnostics Workspace',
         },
         {
             '<Leader>fD',
             function()
-                require('fzf-lua').diagnostics_workspace()
+                require('fzf-lua').diagnostics_document()
             end,
-            desc = '[FzfLua] Diagnostics Workspace',
+            desc = '[FzfLua] Diagnostics Document',
         },
         -- Jujutsu
         {
