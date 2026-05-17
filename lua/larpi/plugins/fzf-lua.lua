@@ -94,6 +94,22 @@ return {
             desc = '[FzfLua] History',
         },
         {
+            '<Leader>fs',
+            function()
+                require('fzf-lua').lsp_document_symbols()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] LSP Document Symbols',
+        },
+        {
+            '<Leader>fS',
+            function()
+                require('fzf-lua').lsp_workspace_symbols()
+            end,
+            mode = { 'n', 'x' },
+            desc = '[FzfLua] LSP Workspace Symbols',
+        },
+        {
             '<Leader>sb',
             function()
                 require('fzf-lua').blines()
