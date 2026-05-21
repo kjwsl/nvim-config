@@ -24,7 +24,7 @@ local function get_dashboard_dimens(width_scale, height_scale, gap_scale)
         height = math.floor(vim.o.lines * height_scale),
     }
     local image = {
-        width = math.floor((dashboard.width - gap) / 2) - 2,
+        width = math.floor((dashboard.width - gap) / 2) - 4, -- Increased buffer to prevent wrapping
         height = dashboard.height - 2,
     }
 
@@ -35,22 +35,33 @@ local function get_dashboard_dimens(width_scale, height_scale, gap_scale)
     }
 end
 
-local WIDTH_SCALE = 0.7
+local WIDTH_SCALE = 0.8
 local HEIGHT_SCALE = 0.7
-local GAP_SCALE = 0.04
-
-local dimens = get_dashboard_dimens(WIDTH_SCALE, HEIGHT_SCALE, GAP_SCALE)
+local GAP_SCALE = 0.12
 
 local function generate_dashboard_sections()
+    local dimens = get_dashboard_dimens(WIDTH_SCALE, HEIGHT_SCALE, GAP_SCALE)
+
+    -- Estimate the height of the right pane content to center it vertically
+    -- Header: 6 lines, Keys: 10 lines, Startup: 1 line, Version: 1 line, Gaps/Padding: ~10 lines
+    local content_height = 28
+    local top_padding = math.max(0, math.floor((dimens.dashboard.height - content_height) / 2))
+
+    local version = vim.version()
+    local nvim_version = string.format('v%d.%d.%d', version.major, version.minor, version.patch)
+
     return {
         {
             section = 'terminal',
             cmd = ('chafa %s --symbols all --view-size %dx%d --align center,center'):format(logo, dimens.image.width, dimens.image.height),
             height = dimens.dashboard.height,
+            width = dimens.image.width,
         },
         {
             pane = 2,
             height = dimens.dashboard.height,
+            width = dimens.image.width,
+            { section = 'terminal', cmd = 'echo', height = top_padding },
             { section = 'header', padding = 4 },
             {
                 section = 'keys',
@@ -58,6 +69,14 @@ local function generate_dashboard_sections()
                 padding = 5,
             },
             { section = 'startup' },
+            {
+                text = {
+                    { '󰚐 ', hl = 'footer' },
+                    { 'Neovim ', hl = 'footer' },
+                    { nvim_version, hl = 'special' },
+                },
+                align = 'center',
+            },
         },
     }
 end
@@ -77,7 +96,7 @@ return {
         bigfile = { enabled = true },
         bufdelete = { enabled = true }, -- Delete buffers without disrupting window layout.
         dashboard = {
-            pane_gap = dimens.gap,
+            pane_gap = math.floor(vim.o.columns * GAP_SCALE),
             preset = {
                 keys = {
                     { icon = ' ', key = 'f', desc = 'Find File', action = ':lua Snacks.picker.files({ hidden = true, ignored = true})' },
@@ -304,33 +323,29 @@ return {
 
         -- Fix for a while
         local M = require('snacks.picker.core.main')
-        M.new = function(opts)
-            opts = vim.tbl_extend('force', {
+        local old_new = M.new
+        M.new = function(new_opts)
+            new_opts = vim.tbl_extend('force', {
                 float = false,
                 file = true,
                 current = false,
-            }, opts or {})
+            }, new_opts or {})
             local self = setmetatable({}, M)
-            self.opts = opts
+            self.opts = new_opts
             self.win = vim.api.nvim_get_current_win()
             return self
         end
-    end,
-    config = function(_, opts)
-        require('snacks').setup(opts)
 
         vim.api.nvim_create_autocmd('VimResized', {
             group = vim.api.nvim_create_augroup('SnacksDashboardResize', { clear = true }),
             callback = function()
-                local new_dimens = get_dashboard_dimens(WIDTH_SCALE, HEIGHT_SCALE, GAP_SCALE)
-
-                -- Update the cached configuration
-                Snacks.config.dashboard.pane_gap = new_dimens.gap
-                Snacks.config.dashboard.sections[1] = generate_dashboard_sections()
-                Snacks.config.dashboard.sections[2].height = new_dimens.dashboard.height
-
+                local snacks = package.loaded['snacks']
+                if snacks and snacks.config and snacks.config.dashboard then
+                    snacks.config.dashboard.pane_gap = math.floor(vim.o.columns * GAP_SCALE)
+                    snacks.config.dashboard.sections = generate_dashboard_sections()
+                end
                 if vim.bo.filetype == 'snacks_dashboard' then
-                    Snacks.dashboard.update()
+                    require('snacks.dashboard').update()
                 end
             end,
         })
