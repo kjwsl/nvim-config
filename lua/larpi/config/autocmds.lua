@@ -1,9 +1,17 @@
-vim.api.nvim_create_autocmd('TextYankPost', {
-    group = vim.api.nvim_create_augroup('HightlightYank', {}),
-    desc = 'Hightlight selection on yank',
+vim.api.nvim_create_autocmd('TextPutPost', {
+    group = vim.api.nvim_create_augroup('HightlightPutText', {}),
+    desc = 'Highlight put text',
     callback = function()
-        vim.hl.on_yank({ higroup = 'IncSearch', timeout = 200 })
+        if vim.fn.has('nvim-0.13') == 1 then
+            vim.hl.hl_op({ higroup = 'IncSearch', timeout = 200 })
 
+            if vim.fn.has('nvim-0.14') == 1 then
+                -- TODO: If this day comes, remove on_yank
+                vim.notify('Remove on_yank in favor of hl_op', vim.log.levels.WARN)
+            end
+        else
+            vim.hl.on_yank({ higroup = 'IncSearch', timeout = 200 })
+        end
         local ev = vim.v.event
         -- Notify when yanked to the clipboard
         if ev.regname == '+' then

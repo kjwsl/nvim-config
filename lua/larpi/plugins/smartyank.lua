@@ -1,5 +1,5 @@
 return {
-    'ibhagwan/smartyank.nvim',
+    'larpios/smartyank.nvim',
     event = 'VeryLazy',
     opts = {
         highlight = {
