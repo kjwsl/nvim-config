@@ -31,6 +31,8 @@ local voyager = {
             KC_RIGHT_SHIFT = 'RSHIFT',
             KC_LEFT_GUI = 'LGUI',
             KC_RIGHT_GUI = 'RGUI',
+            KC_BRIGHTNESS_UP = 'briup',
+            KC_BRIGHTNESS_DOWN = 'bridown',
         },
     },
     layout = { -- create a visual representation of your final layout
