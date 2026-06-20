@@ -1,8 +1,5 @@
 return {
-    -- TODO: revert back when the fix is merged
-    -- 'Bekaboo/dropbar.nvim',
-    'cubewhy/dropbar.nvim',
-    branch = 'fix-event',
+    'Bekaboo/dropbar.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
     dependencies = {
         'nvim-telescope/telescope-fzf-native.nvim',
